@@ -1,0 +1,53 @@
+import { forwardRef, useId } from "react";
+
+const Input = forwardRef(function Input(
+  {
+    label,
+    icon1,
+    icon2,
+    iconWidth = "w-5",
+    iconHeight = "h-5",
+    iconClassName,
+    onClick,
+    type = "text",
+    className = "",
+    ...props
+  },
+  ref
+) {
+  const id = useId();
+
+  return (
+    <div className="w-full flex flex-col">
+      {label && (
+        <label htmlFor={id} className="inline-block mb-1 font-medium">
+          {label}
+        </label>
+      )}
+
+      <div className="w-full flex items-center border border-dark-1 dark:border-none rounded-lg px-3">
+        {icon1 && (
+          <div className={`${iconClassName} ${iconWidth} ${iconHeight}`}>
+            {icon1}
+          </div>
+        )}
+        <input
+          type={type}
+          id={id}
+          ref={ref}
+          className={`${className} w-full bg-light-1 dark:bg-dark-1 dark:bg-opacity-30 px-3 py-2  text-dark-1 dark:text-light-1  outline-none`}
+          {...props}
+        />
+        {icon2 && (
+          <div
+            className={`${iconClassName} ${iconWidth} ${iconHeight} cursor-pointer`}
+            onClick={onClick}>
+            {icon2}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+});
+
+export default Input;
