@@ -7,7 +7,7 @@ import {
   EyeIcon,
   EyeSlashIcon,
 } from "@heroicons/react/24/solid";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import useAuth from "../hooks/useAuth";
 import axios from "../api/axios";
@@ -61,8 +61,17 @@ const LoginComponent = () => {
 
   return (
     <div className="flex items-center justify-center h-full">
-      <div className="flex flex-col items-center gap-4 max-w-md w-full px-2">
-        <h1 className="text-3xl text-dark-1 font-semibold">Login</h1>
+      <div className="flex flex-col items-center gap-4 max-w-md w-full p-6 bg-light-1 bg-opacity-50 backdrop-blur-[8px] border border-light-1 border-opacity-50 rounded-lg shadow-lg shadow-dark-1">
+        <div className="w-full h-auto flex items-center justify-center">
+          <img
+            src="/assets/youtube-dark-logo.svg"
+            alt="Logo"
+            className="w-28"
+          />
+        </div>
+        <h1 className="text-xl text-dark-1 font-semibold text-center">
+          Sign in to your account
+        </h1>
 
         {error && <p className="text-red-600 mt-8 text-center">{error}</p>}
 
@@ -94,6 +103,17 @@ const LoginComponent = () => {
             </Button>
           </div>
         </form>
+        <div className="w-full flex flex-col-reverse gap-2 sm:flex-row justify-between items-center text-xs">
+          <p>
+            Don&apos;t have an account? Sign up{" "}
+            <Link to={"/register"} className="underline">
+              here
+            </Link>
+          </p>
+          <Link to={"/forgot-password"} className="underline">
+            Forgot Password
+          </Link>
+        </div>
       </div>
     </div>
   );

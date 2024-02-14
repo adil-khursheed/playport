@@ -22,16 +22,16 @@ const Profile = () => {
         isMounted && setUser(response?.data.data);
       } catch (err) {
         console.error(err);
-        // navigate("/login", { state: { from: location }, replace: true });
+        navigate("/login", { state: { from: location }, replace: true });
       }
     };
 
     getUser();
 
-    return () => {
-      isMounted = false;
-      controller.abort();
-    };
+    // return () => {
+    //   isMounted = false;
+    //   controller.abort();
+    // };
   }, []);
   return (
     <>

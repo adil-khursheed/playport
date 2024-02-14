@@ -12,6 +12,7 @@ export default {
     colors: {
       "dark-1": "#0F0F0F",
       "light-1": "#FFFFFF",
+      transparent: "transparent",
     },
     extend: {},
   },

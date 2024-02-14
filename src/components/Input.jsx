@@ -35,7 +35,7 @@ const Input = forwardRef(function Input(
           type={type}
           id={id}
           ref={ref}
-          className={`${className} w-full bg-light-1 dark:bg-dark-1 dark:bg-opacity-30 px-3 py-2  text-dark-1 dark:text-light-1  outline-none`}
+          className={`${className} w-full px-3 py-2 bg-transparent text-dark-1 dark:text-light-1  outline-none`}
           {...props}
         />
         {icon2 && (

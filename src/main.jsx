@@ -7,12 +7,16 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import ThemeProvider from "./context/ThemeContext.jsx";
 import { AuthProvider } from "./context/AuthContext.jsx";
-import { Login, Profile, Home } from "./pages";
+import { Login, Profile, Home, Register } from "./pages";
 import { PersistLogin } from "./components";
 
 const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
+  {
+    path: "/register",
+    element: <Register />,
+  },
   {
     path: "/login",
     element: <Login />,
