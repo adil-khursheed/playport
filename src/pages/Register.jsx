@@ -2,7 +2,7 @@ import { RegisterComponent } from "../components";
 
 const Register = () => {
   return (
-    <div className="max-w-screen-xl w-full h-screen relative px-3">
+    <div className="max-w-screen-xl w-full h-screen mx-auto relative">
       <img
         src="/assets/login-bg.jpg"
         alt="Login-Bg"

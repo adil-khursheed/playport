@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 
 function App() {
   return (
-    <div className="max-w-screen-xl">
+    <div className="max-w-screen-xl w-full mx-auto">
       <Outlet />
     </div>
   );

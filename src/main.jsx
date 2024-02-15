@@ -8,7 +8,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import ThemeProvider from "./context/ThemeContext.jsx";
 import { AuthProvider } from "./context/AuthContext.jsx";
 import { Login, Profile, Home, Register } from "./pages";
-import { PersistLogin } from "./components";
+import { PersistLogin, AuthLayout } from "./components";
 
 const queryClient = new QueryClient();
 
@@ -26,15 +26,27 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <App />,
+        element: (
+          <AuthLayout>
+            <App />
+          </AuthLayout>
+        ),
         children: [
           {
             path: "/",
-            element: <Home />,
+            element: (
+              <AuthLayout>
+                <Home />
+              </AuthLayout>
+            ),
           },
           {
             path: "/profile/:username",
-            element: <Profile />,
+            element: (
+              <AuthLayout>
+                <Profile />
+              </AuthLayout>
+            ),
           },
         ],
       },

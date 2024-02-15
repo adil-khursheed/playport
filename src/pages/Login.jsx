@@ -2,7 +2,7 @@ import { LoginComponent } from "../components";
 
 const Login = () => {
   return (
-    <div className="max-w-screen-xl w-full h-screen relative px-3">
+    <div className="max-w-screen-xl w-full h-screen mx-auto relative px-3">
       <img
         src="/assets/login-bg.jpg"
         alt="Login-Bg"
