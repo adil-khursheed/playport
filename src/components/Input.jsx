@@ -25,7 +25,7 @@ const Input = forwardRef(function Input(
         </label>
       )}
 
-      <div className="w-full flex items-center border border-dark-1 dark:border-none rounded-lg px-3">
+      <div className="w-full flex items-center border border-dark-1 rounded-lg px-3">
         {icon1 && (
           <div className={`${iconClassName} ${iconWidth} ${iconHeight}`}>
             {icon1}
@@ -35,7 +35,7 @@ const Input = forwardRef(function Input(
           type={type}
           id={id}
           ref={ref}
-          className={`${className} w-full px-3 py-2 bg-transparent text-dark-1 dark:text-light-1  outline-none`}
+          className={`${className} w-full px-3 py-2 bg-transparent text-dark-1 outline-none`}
           {...props}
         />
         {icon2 && (

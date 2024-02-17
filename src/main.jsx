@@ -7,7 +7,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import ThemeProvider from "./context/ThemeContext.jsx";
 import { AuthProvider } from "./context/AuthContext.jsx";
-import { Login, Profile, Home, Register } from "./pages";
+import { Login, Profile, Home, Register, LikedVideos } from "./pages";
 import { PersistLogin, AuthLayout } from "./components";
 
 const queryClient = new QueryClient();
@@ -37,6 +37,14 @@ const router = createBrowserRouter([
             element: (
               <AuthLayout>
                 <Home />
+              </AuthLayout>
+            ),
+          },
+          {
+            path: "/liked-videos",
+            element: (
+              <AuthLayout>
+                <LikedVideos />
               </AuthLayout>
             ),
           },

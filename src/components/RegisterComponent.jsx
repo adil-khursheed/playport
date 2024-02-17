@@ -82,7 +82,7 @@ const RegisterComponent = () => {
             <form
               className="w-full flex flex-col gap-3"
               onSubmit={handleSubmit(onSubmit)}>
-              <div className="w-full h-32 relative border border-dark-1 dark:border-none rounded-lg p-[2px]">
+              <div className="w-full h-32 relative border border-dark-1 rounded-lg p-[2px]">
                 {coverImagePrev && (
                   <img
                     src={coverImagePrev}
@@ -110,7 +110,7 @@ const RegisterComponent = () => {
                 </label>
                 <label
                   htmlFor="avatar"
-                  className="w-24 h-24 absolute top-1/2 -translate-y-1/2 left-3 flex justify-center items-center border border-dark-1 dark:border-none rounded-full cursor-pointer p-[2px]">
+                  className="w-24 h-24 absolute top-1/2 -translate-y-1/2 left-3 flex justify-center items-center border border-dark-1 rounded-full cursor-pointer p-[2px]">
                   {avatarPrev ? (
                     <img
                       src={avatarPrev}

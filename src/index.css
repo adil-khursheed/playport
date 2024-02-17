@@ -42,4 +42,12 @@
       opacity: 0;
     }
   }
+
+  .main__section__height {
+    height: calc(100vh - 57px);
+  }
+
+  .small_device_main_height {
+    height: calc(100vh - 122px);
+  }
 }

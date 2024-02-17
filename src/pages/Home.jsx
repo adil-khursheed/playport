@@ -1,4 +1,5 @@
-import { axiosPrivate } from "../api/axios";
+import { Loader } from "../components";
+import { useLogoutUser } from "../features/authApi";
 import useAuth from "../hooks/useAuth";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -7,14 +8,10 @@ const Home = () => {
 
   const navigate = useNavigate();
 
+  const { mutateAsync: logoutUser, isPending: isLoading } = useLogoutUser();
+
   const handleLogout = async () => {
-    const response = await axiosPrivate.post(
-      "/users/logout",
-      {},
-      {
-        withCredentials: true,
-      }
-    );
+    const response = await logoutUser();
 
     if (response) {
       setAuth({});
@@ -23,9 +20,15 @@ const Home = () => {
   };
   return (
     <>
-      <Link to={"/profile/chai1"}>Go to profile</Link>
-      <br />
-      <button onClick={handleLogout}>Logout</button>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <div>
+          <Link to={"/profile/chai1"}>Go to profile</Link>
+          <br />
+          <button onClick={handleLogout}>Logout</button>
+        </div>
+      )}
     </>
   );
 };
