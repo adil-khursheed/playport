@@ -5,13 +5,13 @@ import { ThemeState } from "../../context/ThemeContext";
 const Bottombar = () => {
   const { theme } = ThemeState();
   return (
-    <nav className="sm:hidden">
-      <ul className="flex items-center justify-between border-t border-t-light-2 dark:border-t-dark-2 py-2 px-3">
+    <nav className="md:hidden">
+      <ul className="flex items-center justify-between bg-light-1 dark:bg-dark-1 border-t border-t-light-2 dark:border-t-dark-2 py-2 px-3">
         {navLinks.map((link) => (
           <NavLink key={link.route} to={link.route}>
             {({ isActive }) => (
               <li
-                className={`flex flex-col items-center justify-center md:justify-normal gap-1 w-full h-12 px-3 rounded-full ${
+                className={`flex flex-col items-center justify-center md:justify-normal gap-1 w-full h-12 px-3 rounded-md ${
                   isActive ? "bg-light-2 dark:bg-dark-2" : ""
                 }`}>
                 <div

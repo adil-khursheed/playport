@@ -8,6 +8,8 @@ import Loader from "./Loader";
 import Header from "./shared/Header";
 import Sidebar from "./shared/Sidebar";
 import Bottombar from "./shared/Bottombar";
+import VideoPostCard from "./VideoPostCard";
+import Comments from "./Comments";
 
 export {
   Loader,
@@ -20,4 +22,6 @@ export {
   Header,
   Sidebar,
   Bottombar,
+  VideoPostCard,
+  Comments,
 };

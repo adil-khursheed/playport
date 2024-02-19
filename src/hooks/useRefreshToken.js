@@ -14,13 +14,15 @@ const useRefreshToken = () => {
     );
 
     setAuth((prev) => {
-      console.log(JSON.stringify(prev));
-      console.log(response?.data?.data.accessToken);
-      return { ...prev, accessToken: response?.data?.data.accessToken };
+      return {
+        ...prev,
+        accessToken: response?.data?.data.accessToken,
+      };
     });
 
     return response?.data?.data.accessToken;
   };
+
   return refresh;
 };
 

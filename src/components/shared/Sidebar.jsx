@@ -5,7 +5,7 @@ import { ThemeState } from "../../context/ThemeContext";
 const Sidebar = () => {
   const { theme } = ThemeState();
   return (
-    <aside className="hidden sm:block sm:w-[80px] md:w-60 px-4 py-6 border border-t-0 border-b-0 border-light-2 dark:border-dark-2">
+    <aside className="hidden md:block md:w-[80px] lg:w-60 px-4 py-6 border border-t-0 border-b-0 border-light-2 dark:border-dark-2">
       <nav>
         <ul className="flex flex-col gap-3">
           {navLinks.map((link) => (
@@ -16,9 +16,7 @@ const Sidebar = () => {
                     isActive ? "bg-light-2 dark:bg-dark-2" : ""
                   }`}>
                   <div
-                    className={`${
-                      theme === "dark" ? "text-light-1" : "text-dark-1"
-                    } w-8 h-8 md:w-5 md:h-5 mt-2 md:mt-0`}>
+                    className={`dark:text-light-1 text-dark-1 w-8 h-8 md:w-5 md:h-5 mt-2 md:mt-0`}>
                     {link.label !== "History" && (
                       <span>{isActive ? link.iconFill : link.iconOutline}</span>
                     )}
@@ -37,9 +35,7 @@ const Sidebar = () => {
                     )}
                   </div>
                   <div
-                    className={`mt-[2px] hidden md:inline-block ${
-                      theme === "dark" ? "text-light-1" : "text-dark-1"
-                    }`}>
+                    className={`mt-[2px] hidden lg:inline-block dark:text-light-1 text-dark-1`}>
                     {link.label}
                   </div>
                 </li>

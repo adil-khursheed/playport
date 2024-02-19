@@ -1,32 +1,69 @@
-import { Loader } from "../components";
-import { useLogoutUser } from "../features/authApi";
-import useAuth from "../hooks/useAuth";
-import { Link, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { Loader, VideoPostCard } from "../components";
+import { useGetAllVideos } from "../features/videoApi";
 
 const Home = () => {
-  const { setAuth } = useAuth();
+  const {
+    data: videoData,
+    isLoading,
+    fetchNextPage,
+    hasNextPage,
+    isFetching,
+  } = useGetAllVideos();
 
-  const navigate = useNavigate();
+  useEffect(() => {
+    const fetchMoreHandler = () => {
+      try {
+        if (
+          window.innerHeight +
+            document.getElementById("home__page").scrollTop +
+            1 >=
+            document.getElementById("home__page").scrollHeight &&
+          !isFetching &&
+          hasNextPage
+        ) {
+          fetchNextPage();
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
 
-  const { mutateAsync: logoutUser, isPending: isLoading } = useLogoutUser();
+    document
+      .getElementById("home__page")
+      ?.addEventListener("scroll", fetchMoreHandler);
 
-  const handleLogout = async () => {
-    const response = await logoutUser();
+    return () => {
+      document.removeEventListener("scroll", fetchMoreHandler);
+    };
+  }, []);
 
-    if (response) {
-      setAuth({});
-      navigate("/login");
-    }
-  };
   return (
     <>
       {isLoading ? (
         <Loader />
       ) : (
-        <div>
-          <Link to={"/profile/chai1"}>Go to profile</Link>
-          <br />
-          <button onClick={handleLogout}>Logout</button>
+        <div
+          id="home__page"
+          className="w-full h-full overflow-x-hidden overflow-y-auto p-3">
+          {videoData.pages.map((page, index) => (
+            <div
+              key={index}
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
+              {page?.data?.videos.map((video) => (
+                <VideoPostCard key={video._id} video={video} />
+              ))}
+            </div>
+          ))}
+
+          {isFetching && hasNextPage && (
+            <Loader className="flex justify-center items-center" />
+          )}
+          {!hasNextPage && (
+            <p className="text-center text-dark-2 dark:text-light-2 text-sm mt-5">
+              No more data!!
+            </p>
+          )}
         </div>
       )}
     </>

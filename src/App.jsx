@@ -16,7 +16,7 @@ function App() {
           </header>
           <main className="flex small_device_main_height  sm:main__section__height">
             <Sidebar />
-            <section className="border-r border-r-light-2 dark:border-r-dark-2 w-full overflow-x-hidden overflow-y-auto">
+            <section className="border-r border-r-light-2 dark:border-r-dark-2 w-full">
               <Outlet />
             </section>
           </main>

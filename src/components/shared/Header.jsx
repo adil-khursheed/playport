@@ -5,10 +5,14 @@ import {
 } from "@heroicons/react/24/outline";
 import { ThemeState } from "../../context/ThemeContext";
 import { Link, useNavigate } from "react-router-dom";
-import { Button, Loader } from "../index";
+import { Loader } from "../index";
 import { useEffect, useRef, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import { useLogoutUser } from "../../features/authApi";
+import {
+  ArrowRightStartOnRectangleIcon,
+  UserIcon,
+} from "@heroicons/react/24/outline";
 
 const Header = ({ currentUser }) => {
   const [toggleModal, setToggleModal] = useState(false);
@@ -52,9 +56,8 @@ const Header = ({ currentUser }) => {
         <Loader />
       ) : (
         <div
-          className={`flex items-center justify-between py-2 px-3 sm:px-5 bg-light-1 dark:bg-dark-1 border border-t-0  ${
-            theme === "dark" ? "border-dark-2" : "border-light-2"
-          }`}>
+          className={`flex items-center justify-between py-2 px-3 sm:px-5 bg-light-1 dark:bg-dark-1 border border-t-0
+            dark:border-dark-2 border-light-2`}>
           <div>
             <Link to={"/"}>
               <img
@@ -69,9 +72,7 @@ const Header = ({ currentUser }) => {
             </Link>
           </div>
           <form
-            className={`max-w-[430px] w-full hidden md:flex md:items-center ${
-              theme === "dark" ? "bg-dark-2" : "bg-transparent"
-            } rounded-full border border-light-2 dark:border-none px-4 py-[6px]`}>
+            className={`max-w-[430px] w-full hidden md:flex md:items-center dark:bg-dark-2 bg-transparent rounded-full border border-light-2 dark:border-none px-4 py-[6px]`}>
             <input
               type="text"
               placeholder="Search"
@@ -79,25 +80,21 @@ const Header = ({ currentUser }) => {
             />
             <div>
               <MagnifyingGlassIcon
-                className={`w-6 h-6 ${
-                  theme === "dark" ? "text-light-1" : "text-dark-1"
-                }`}
+                className={`w-6 h-6 dark:text-light-1 text-dark-1`}
               />
             </div>
           </form>
           <div className="flex items-center gap-4">
             <div className="w-6 h-6 text-dark-1 md:hidden cursor-pointer">
               <MagnifyingGlassIcon
-                className={`${
-                  theme === "dark" ? "text-light-1" : "text-dark-1"
-                }`}
+                className={`dark:text-light-1 text-dark-1`}
               />
             </div>
             <div className="w-6 h-6 cursor-pointer" onClick={handleThemeSwitch}>
               {theme === "dark" ? (
                 <SunIcon className="text-light-1" />
               ) : (
-                <MoonIcon />
+                <MoonIcon className="text-dark-1" />
               )}
             </div>
             <div
@@ -110,20 +107,39 @@ const Header = ({ currentUser }) => {
                 className="w-full h-full object-cover object-top rounded-full"
               />
               {toggleModal && (
-                <div className="absolute right-0 -bottom-32 bg-light-2 dark:bg-dark-2 flex items-center flex-col justify-center gap-3 px-3 py-6 rounded-md text-dark-1 dark:text-light-1">
+                <div className="profile__modal">
+                  <div className="whitespace-nowrap mb-3">
+                    <p className="font-semibold">
+                      {currentUser?.username.length > 20
+                        ? currentUser?.username.substring(0, 20).concat("...")
+                        : currentUser?.username}
+                    </p>
+                    <p className="text-sm text-dark-2 dark:text-light-2">
+                      {currentUser?.fullName.length > 20
+                        ? currentUser?.fullName.substring(0, 20).concat("...")
+                        : currentUser?.fullName}
+                    </p>
+                  </div>
+
                   <div>
-                    <Link to={`/profile/${currentUser?.username}`}>
-                      Profile
+                    <Link
+                      to={`/profile/${currentUser?.username}`}
+                      className="flex items-center gap-2">
+                      <span>
+                        <UserIcon className="w-5 h-5 text-dark-1 dark:text-light-1" />
+                      </span>
+                      <span>Profile</span>
                     </Link>
                   </div>
                   <div>
-                    <Button
-                      bgColor="bg-transparent"
-                      textColor="text-dark-1"
-                      className="dark:text-light-1"
+                    <button
+                      className="bg-transparent text-dark-1 dark:text-light-1 flex items-center gap-2"
                       onClick={handleLogout}>
-                      Logout
-                    </Button>
+                      <span>
+                        <ArrowRightStartOnRectangleIcon className="w-5 h-5 text-dark-1 dark:text-light-1" />
+                      </span>
+                      <span>Logout</span>
+                    </button>
                   </div>
                 </div>
               )}

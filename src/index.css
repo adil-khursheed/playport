@@ -50,4 +50,12 @@
   .small_device_main_height {
     height: calc(100vh - 122px);
   }
+
+  .profile__modal {
+    @apply absolute right-0 -bottom-52 w-52 bg-light-2 dark:bg-dark-2 flex flex-col justify-center gap-4 px-3 py-6 rounded-[5px] text-dark-1 dark:text-light-1 bg-opacity-50 dark:bg-opacity-50 backdrop-blur-[5px] dark:backdrop-blur-[5px] border border-light-2 dark:border-dark-2 border-opacity-50 shadow-lg shadow-light-2 dark:shadow-dark-2;
+  }
+
+  .profile__modal::before {
+    @apply content-[''] w-0 h-0 absolute -top-[25px] right-4 border-l-[25px] border-l-transparent border-t-0 border-t-transparent border-r-0 border-b-[25px] border-b-light-2 dark:border-b-dark-2 backdrop-blur-[5px] border-opacity-70;
+  }
 }
