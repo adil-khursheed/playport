@@ -16,6 +16,7 @@ import {
   VideoDetails,
 } from "./pages";
 import { PersistLogin, AuthLayout } from "./components";
+import "react-toastify/dist/ReactToastify.css";
 
 const queryClient = new QueryClient();
 

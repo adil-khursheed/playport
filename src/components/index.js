@@ -10,6 +10,7 @@ import Sidebar from "./shared/Sidebar";
 import Bottombar from "./shared/Bottombar";
 import VideoPostCard from "./VideoPostCard";
 import Comments from "./Comments";
+import CommentForm from "./CommentForm";
 
 export {
   Loader,
@@ -24,4 +25,5 @@ export {
   Bottombar,
   VideoPostCard,
   Comments,
+  CommentForm,
 };

@@ -2,8 +2,11 @@ import "./App.css";
 import { Outlet } from "react-router-dom";
 import { Bottombar, Header, Loader, Sidebar } from "./components";
 import { useGetCurrentUser } from "./features/authApi";
+import { ToastContainer } from "react-toastify";
+import { ThemeState } from "./context/ThemeContext";
 
 function App() {
+  const { theme } = ThemeState();
   const { data: currentUser, isLoading } = useGetCurrentUser();
   return (
     <>
@@ -23,6 +26,7 @@ function App() {
           <div className="sticky bottom-0 left-0 right-0">
             <Bottombar />
           </div>
+          <ToastContainer theme={`${theme === "dark" ? "dark" : "light"}`} />
         </div>
       )}
     </>
