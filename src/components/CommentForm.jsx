@@ -5,10 +5,8 @@ import {
 } from "../features/commentApi";
 import { Button, Loader } from "./index";
 import { toast } from "react-toastify";
-import { useEffect, useRef } from "react";
 
 const CommentForm = ({ videoId, comment, setEditableComment }) => {
-  const inputRef = useRef();
   const { handleSubmit, control, reset } = useForm({
     defaultValues: {
       content: comment?.content || "",
@@ -36,10 +34,6 @@ const CommentForm = ({ videoId, comment, setEditableComment }) => {
       }
     }
   };
-
-  useEffect(() => {
-    inputRef.current.focus();
-  }, []);
   return (
     <form
       className="w-full flex items-center gap-2"
@@ -50,7 +44,6 @@ const CommentForm = ({ videoId, comment, setEditableComment }) => {
         render={({ field }) => (
           <textarea
             {...field}
-            ref={inputRef}
             placeholder="Add a comment"
             className="w-full h-9 bg-transparent text-dark-1 dark:text-light-1 border-b border-b-dark-2 dark:border-b-light-2 outline-none"
             onKeyDown={(e) => {

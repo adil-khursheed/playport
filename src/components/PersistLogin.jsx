@@ -7,20 +7,24 @@ import { Loader } from "./index";
 const PersistLogin = () => {
   const [loading, setLoading] = useState(true);
   const refresh = useRefreshToken();
-  const { auth } = useAuth();
+  const { auth, persist } = useAuth();
 
   useEffect(() => {
+    let isMounted = true;
+
     const verifyRefreshToken = async () => {
       try {
         await refresh();
       } catch (err) {
         console.error(err);
       } finally {
-        setLoading(false);
+        isMounted && setLoading(false);
       }
     };
 
-    !auth?.accessToken ? verifyRefreshToken() : setLoading(false);
+    !auth?.accessToken && persist ? verifyRefreshToken() : setLoading(false);
+
+    return () => (isMounted = false);
   }, []);
 
   useEffect(() => {
@@ -28,7 +32,7 @@ const PersistLogin = () => {
     console.log(`aT: ${auth?.accessToken}`);
   }, [loading]);
 
-  return <>{loading ? <Loader /> : <Outlet />}</>;
+  return <>{!persist ? <Outlet /> : loading ? <Loader /> : <Outlet />}</>;
 };
 
 export default PersistLogin;

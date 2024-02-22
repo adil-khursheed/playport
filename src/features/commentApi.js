@@ -18,7 +18,7 @@ export const useGetVideoComments = (videoId) => {
 
       return response.data;
     },
-    getNextPageParam: (lastPage) => lastPage?.data?.nextPage || null,
+    getNextPageParam: (lastPage) => lastPage?.data?.nextPage || undefined,
   });
 };
 
@@ -40,6 +40,10 @@ export const useAddVideoComments = (videoId) => {
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ["comments"],
+      });
+
+      queryClient.invalidateQueries({
+        queryKey: ["videos"],
       });
     },
   });
@@ -80,6 +84,10 @@ export const useDeleteVideoComment = ({ commentId }) => {
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ["comments"],
+      });
+
+      queryClient.invalidateQueries({
+        queryKey: ["videos"],
       });
     },
   });

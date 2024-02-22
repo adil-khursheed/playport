@@ -1,6 +1,6 @@
-import { useEffect } from "react";
 import { Loader, VideoPostCard } from "../components";
 import { useGetAllVideos } from "../features/videoApi";
+import InfiniteScroll from "react-infinite-scroller";
 
 const Home = () => {
   const {
@@ -11,60 +11,41 @@ const Home = () => {
     isFetching,
   } = useGetAllVideos();
 
-  useEffect(() => {
-    const fetchMoreHandler = () => {
-      try {
-        if (
-          window.innerHeight +
-            document.getElementById("home__page").scrollTop +
-            1 >=
-            document.getElementById("home__page").scrollHeight &&
-          !isFetching &&
-          hasNextPage
-        ) {
-          fetchNextPage();
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    document
-      .getElementById("home__page")
-      ?.addEventListener("scroll", fetchMoreHandler);
-
-    return () => {
-      document.removeEventListener("scroll", fetchMoreHandler);
-    };
-  }, []);
+  console.log(videoData);
 
   return (
     <>
-      {isLoading ? (
+      {isLoading || isFetching ? (
         <Loader />
       ) : (
-        <div
-          id="home__page"
-          className="w-full h-full overflow-x-hidden overflow-y-auto p-3">
-          {videoData.pages.map((page, index) => (
-            <div
-              key={index}
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
-              {page?.data?.videos.map((video) => (
-                <VideoPostCard key={video._id} video={video} />
-              ))}
-            </div>
-          ))}
+        <InfiniteScroll
+          className="w-full"
+          loadMore={fetchNextPage}
+          hasMore={hasNextPage}
+          pageStart={1}>
+          <div
+            id="home__page"
+            className="w-full h-full overflow-x-hidden overflow-y-auto p-3">
+            {videoData?.pages?.map((page, index) => (
+              <div
+                key={index}
+                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
+                {page?.data?.videos.map((video) => (
+                  <VideoPostCard key={video._id} video={video} />
+                ))}
+              </div>
+            ))}
 
-          {isFetching && hasNextPage && (
-            <Loader className="flex justify-center items-center" />
-          )}
-          {!hasNextPage && (
-            <p className="text-center text-dark-2 dark:text-light-2 text-sm mt-5">
-              No more data!!
-            </p>
-          )}
-        </div>
+            {isFetching && hasNextPage && (
+              <Loader className="flex justify-center items-center" />
+            )}
+            {!hasNextPage && (
+              <p className="text-center text-dark-2 dark:text-light-2 text-sm mt-5">
+                No more data!!
+              </p>
+            )}
+          </div>
+        </InfiniteScroll>
       )}
     </>
   );

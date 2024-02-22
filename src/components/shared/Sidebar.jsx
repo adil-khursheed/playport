@@ -5,7 +5,7 @@ import { ThemeState } from "../../context/ThemeContext";
 const Sidebar = () => {
   const { theme } = ThemeState();
   return (
-    <aside className="hidden md:block md:w-[80px] lg:w-60 px-4 py-6 border border-t-0 border-b-0 border-light-2 dark:border-dark-2">
+    <aside className="hidden md:flex md:w-[80px] lg:w-60 h-screen px-4 py-6 border border-t-0 border-b-0 border-light-2 dark:border-dark-2">
       <nav>
         <ul className="flex flex-col gap-3">
           {navLinks.map((link) => (

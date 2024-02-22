@@ -55,8 +55,8 @@ const Header = ({ currentUser }) => {
       {isLoading ? (
         <Loader />
       ) : (
-        <div
-          className={`flex items-center justify-between py-2 px-3 sm:px-5 bg-light-1 dark:bg-dark-1 border border-t-0
+        <header
+          className={`sticky top-0 left-0 right-0 z-10 flex items-center justify-between py-2 px-3 sm:px-5 bg-light-1 dark:bg-dark-1 border border-t-0
             dark:border-dark-2 border-light-2`}>
           <div>
             <Link to={"/"}>
@@ -145,7 +145,7 @@ const Header = ({ currentUser }) => {
               )}
             </div>
           </div>
-        </div>
+        </header>
       )}
     </>
   );

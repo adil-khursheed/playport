@@ -14,19 +14,18 @@ function App() {
         <Loader />
       ) : (
         <div className="max-w-screen-xl w-full mx-auto relative">
-          <header className="sticky top-0 left-0 right-0">
-            <Header currentUser={currentUser.data} />
-          </header>
-          <main className="flex small_device_main_height  sm:main__section__height">
+          <Header currentUser={currentUser.data} />
+          <main className="flex small_device_main_height  md:main__section__height border-r border-r-light-2 dark:border-r-dark-2 w-full overflow-hidden">
             <Sidebar />
-            <section className="border-r border-r-light-2 dark:border-r-dark-2 w-full">
-              <Outlet />
-            </section>
+            <Outlet />
           </main>
-          <div className="sticky bottom-0 left-0 right-0">
+          <div className="sticky bottom-0 left-0 right-0 z-10">
             <Bottombar />
           </div>
-          <ToastContainer theme={`${theme === "dark" ? "dark" : "light"}`} />
+          <ToastContainer
+            theme={`${theme === "dark" ? "dark" : "light"}`}
+            autoClose={3000}
+          />
         </div>
       )}
     </>

@@ -10,6 +10,7 @@ import { useState } from "react";
 import { Button, CommentForm } from "./index";
 import { useDeleteVideoComment } from "../features/commentApi";
 import { toast } from "react-toastify";
+import { useLikeUnlikeComment } from "../features/likeApi";
 
 const Comments = ({ comment, currentUser }) => {
   const [commentEditable, setCommentEditable] = useState(false);
@@ -18,8 +19,19 @@ const Comments = ({ comment, currentUser }) => {
     commentId: comment._id,
   });
 
+  const { mutateAsync: likeUnlikeComment } = useLikeUnlikeComment({
+    commentId: comment._id,
+  });
+
   const deleteVideoCommentHandler = async () => {
     const response = await deleteVideoComment();
+    if (response) {
+      toast.success(response?.message);
+    }
+  };
+
+  const likeUnlikeVideoCommentHandler = async () => {
+    const response = await likeUnlikeComment();
     if (response) {
       toast.success(response?.message);
     }
@@ -82,7 +94,9 @@ const Comments = ({ comment, currentUser }) => {
             <h3>{comment?.content}</h3>
           </div>
           <div className="flex items-center gap-4">
-            <div className="cursor-pointer">
+            <div
+              className="cursor-pointer"
+              onClick={likeUnlikeVideoCommentHandler}>
               {comment?.isLiked ? (
                 <ThumbUpFill className="w-4 h-4 text-dark-1 dark:text-light-1" />
               ) : (

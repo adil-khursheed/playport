@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Input, Loader } from "./index";
 import { useForm } from "react-hook-form";
 import {
@@ -17,7 +17,7 @@ const LoginComponent = () => {
 
   const { register, handleSubmit } = useForm();
 
-  const { setAuth } = useAuth();
+  const { setAuth, persist, setPersist } = useAuth();
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -57,6 +57,14 @@ const LoginComponent = () => {
       console.log(error);
     }
   };
+
+  const togglePersist = () => {
+    setPersist((prev) => !prev);
+  };
+
+  useEffect(() => {
+    localStorage.setItem("persist", persist);
+  }, [persist]);
 
   return (
     <>
@@ -105,6 +113,18 @@ const LoginComponent = () => {
                     required: [true, "Password required!"],
                   })}
                 />
+              </div>
+              <div className="flex items-center gap-3 text-dark-1 font-medium text-[15px]">
+                <input
+                  className="w-5 h-5 checked:text-dark-1 cursor-pointer"
+                  type="checkbox"
+                  id="persist"
+                  onChange={togglePersist}
+                  checked={persist}
+                />
+                <label htmlFor="persist" className="cursor-pointer">
+                  Remember me
+                </label>
               </div>
               <div>
                 <Button type="submit" className="w-full">

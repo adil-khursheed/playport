@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -6,7 +6,7 @@
 
 @layer base {
   html {
-    font-family: "Poppins", sans-serif;
+    font-family: "Roboto", sans-serif;
   }
 
   .loader {
@@ -52,7 +52,7 @@
   }
 
   .profile__modal {
-    @apply absolute right-0 -bottom-52 w-52 bg-light-2 dark:bg-dark-2 flex flex-col justify-center gap-4 px-3 py-6 rounded-[5px] text-dark-1 dark:text-light-1 bg-opacity-50 dark:bg-opacity-50 backdrop-blur-[5px] dark:backdrop-blur-[5px] border border-light-2 dark:border-dark-2 border-opacity-50 shadow-lg shadow-light-2 dark:shadow-dark-2;
+    @apply absolute right-0 -bottom-52 w-52 bg-light-2 dark:bg-dark-2 flex flex-col justify-center gap-4 px-3 py-6 rounded-[5px] text-dark-1 dark:text-light-1 bg-opacity-60 dark:bg-opacity-60 backdrop-blur-[8px] dark:backdrop-blur-[8px] border border-light-2 dark:border-dark-2 border-opacity-50 shadow-lg shadow-light-2 dark:shadow-dark-2;
   }
 
   .profile__modal::before {

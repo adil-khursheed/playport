@@ -10,6 +10,8 @@ import { useGetCurrentUser } from "../features/authApi";
 import { multiFormatDateString } from "../utils/utils";
 import { useGetVideoComments } from "../features/commentApi";
 import InfiniteScroll from "react-infinite-scroller";
+import { useLikeUnlikeVideo } from "../features/likeApi";
+import { toast } from "react-toastify";
 
 const VideoDetails = () => {
   const { videoId } = useParams();
@@ -24,6 +26,15 @@ const VideoDetails = () => {
     hasNextPage,
     isFetching,
   } = useGetVideoComments(videoId);
+
+  const { mutateAsync: likeUnlikeVideo } = useLikeUnlikeVideo(videoId);
+
+  const likeUnlikeVideoHandler = async () => {
+    const response = await likeUnlikeVideo();
+    if (response) {
+      toast.success(response?.message);
+    }
+  };
 
   if (isError) {
     return <p className="text-center">{error?.message}</p>;
@@ -41,6 +52,7 @@ const VideoDetails = () => {
         <Loader />
       ) : (
         <InfiniteScroll
+          className="w-full"
           pageStart={1}
           loadMore={fetchNextPage}
           hasMore={hasNextPage}>
@@ -87,6 +99,7 @@ const VideoDetails = () => {
                 </div>
                 <Button
                   bgColor="bg-transparent"
+                  onClick={likeUnlikeVideoHandler}
                   className="border border-light-2 dark:border-dark-2 rounded-r-full rounded-l-full w-20 grid grid-cols-2">
                   {video?.data?.isLiked ? (
                     <ThumbUpFill className="w-6 h-6 text-dark-1 dark:text-light-1" />
