@@ -11,6 +11,8 @@ import Bottombar from "./shared/Bottombar";
 import VideoPostCard from "./VideoPostCard";
 import Comments from "./Comments";
 import CommentForm from "./CommentForm";
+import VideoPostList from "./VideoPostList";
+import SearchForm from "./SearchForm";
 
 export {
   Loader,
@@ -26,4 +28,6 @@ export {
   VideoPostCard,
   Comments,
   CommentForm,
+  VideoPostList,
+  SearchForm,
 };

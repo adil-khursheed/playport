@@ -1,11 +1,12 @@
 import {
+  ArrowLeftIcon,
   MagnifyingGlassIcon,
   MoonIcon,
   SunIcon,
 } from "@heroicons/react/24/outline";
 import { ThemeState } from "../../context/ThemeContext";
 import { Link, useNavigate } from "react-router-dom";
-import { Loader } from "../index";
+import { Button, Loader, SearchForm } from "../index";
 import { useEffect, useRef, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import { useLogoutUser } from "../../features/authApi";
@@ -16,8 +17,12 @@ import {
 
 const Header = ({ currentUser }) => {
   const [toggleModal, setToggleModal] = useState(false);
-  const modalRef = useRef();
+  const [searchTerm, setSearchTerm] = useState("");
+  const [smallDeviceSearchBar, setSmallDeviceSearchBar] = useState(false);
   const { handleThemeSwitch, theme } = ThemeState();
+  const modalRef = useRef();
+  const smallDeviceSearchBarRef = useRef();
+  const smallDeviceSearchInputRef = useRef(null);
 
   const { setAuth } = useAuth();
 
@@ -38,6 +43,15 @@ const Header = ({ currentUser }) => {
     setToggleModal(false);
   };
 
+  const onSmallDeviceSearchBarClose = () => {
+    setSmallDeviceSearchBar(false);
+  };
+
+  const onSearchFormSubmit = (e) => {
+    e.preventDefault();
+    navigate(`/search-result?query=${searchTerm}`);
+  };
+
   useEffect(() => {
     const handleClickOutsideModal = (e) => {
       if (modalRef.current && !modalRef.current.contains(e.target)) {
@@ -50,14 +64,34 @@ const Header = ({ currentUser }) => {
       document.removeEventListener("click", handleClickOutsideModal);
     };
   }, [onClose]);
+
+  useEffect(() => {
+    const handleClickOutsideSearchBar = (e) => {
+      if (
+        smallDeviceSearchBarRef.current &&
+        !smallDeviceSearchBarRef.current.contains(e.target)
+      ) {
+        onSmallDeviceSearchBarClose();
+      }
+    };
+    document.addEventListener("click", handleClickOutsideSearchBar);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutsideSearchBar);
+    };
+  }, [onSmallDeviceSearchBarClose]);
+
+  useEffect(() => {
+    smallDeviceSearchInputRef.current?.focus();
+  }, [smallDeviceSearchBar]);
   return (
     <>
       {isLoading ? (
         <Loader />
       ) : (
         <header
-          className={`sticky top-0 left-0 right-0 z-10 flex items-center justify-between py-2 px-3 sm:px-5 bg-light-1 dark:bg-dark-1 border border-t-0
-            dark:border-dark-2 border-light-2`}>
+          className={`sticky top-0 left-0 right-0 z-10 flex items-center justify-between py-2 px-3 sm:px-5 bg-light-1 dark:bg-dark-1 border border-t-0 dark:border-dark-2 border-light-2`}
+          ref={smallDeviceSearchBarRef}>
           <div>
             <Link to={"/"}>
               <img
@@ -71,21 +105,16 @@ const Header = ({ currentUser }) => {
               />
             </Link>
           </div>
-          <form
-            className={`max-w-[430px] w-full hidden md:flex md:items-center dark:bg-dark-2 bg-transparent rounded-full border border-light-2 dark:border-none px-4 py-[6px]`}>
-            <input
-              type="text"
-              placeholder="Search"
-              className="w-full bg-transparent outline-none dark:text-light-1"
+          <div className="max-w-[500px] w-full hidden md:block">
+            <SearchForm
+              onSearchFormSubmit={onSearchFormSubmit}
+              setSearchTerm={setSearchTerm}
             />
-            <div>
-              <MagnifyingGlassIcon
-                className={`w-6 h-6 dark:text-light-1 text-dark-1`}
-              />
-            </div>
-          </form>
+          </div>
           <div className="flex items-center gap-4">
-            <div className="w-6 h-6 text-dark-1 md:hidden cursor-pointer">
+            <div
+              className="w-6 h-6 text-dark-1 md:hidden cursor-pointer"
+              onClick={() => setSmallDeviceSearchBar(true)}>
               <MagnifyingGlassIcon
                 className={`dark:text-light-1 text-dark-1`}
               />
@@ -145,6 +174,24 @@ const Header = ({ currentUser }) => {
               )}
             </div>
           </div>
+
+          {smallDeviceSearchBar && (
+            <div className="absolute left-0 top-0 right-0 bottom-0 bg-light-1 dark:bg-dark-1 flex items-center md:hidden">
+              <Button
+                bgColor="bg-transparent"
+                textColor="text-dark-1 dark:text"
+                onClick={() => setSmallDeviceSearchBar(false)}>
+                <ArrowLeftIcon className="w-5 h-5" />
+              </Button>
+              <div className="max-w-[500px] w-full mx-auto">
+                <SearchForm
+                  onSearchFormSubmit={onSearchFormSubmit}
+                  setSearchTerm={setSearchTerm}
+                  smallDeviceSearchInputRef={smallDeviceSearchInputRef}
+                />
+              </div>
+            </div>
+          )}
         </header>
       )}
     </>

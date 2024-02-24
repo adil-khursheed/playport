@@ -49,9 +49,22 @@ export const useLogoutUser = () => {
 
 export const useGetCurrentUser = () => {
   return useQuery({
-    queryKey: ["getCurrentUser"],
+    queryKey: ["user"],
     queryFn: async () => {
       const response = await axiosPrivate.get("/users/current-user", {
+        withCredentials: true,
+      });
+
+      return response.data;
+    },
+  });
+};
+
+export const useGetUserChannelProfile = (username) => {
+  return useQuery({
+    queryKey: ["user"],
+    queryFn: async () => {
+      const response = await axiosPrivate.get(`/users/c/${username}`, {
         withCredentials: true,
       });
 

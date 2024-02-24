@@ -28,3 +28,25 @@ export const useGetVideoById = (videoId) => {
     },
   });
 };
+
+export const useGetVideosByQuery = (searchTerm) => {
+  return useInfiniteQuery({
+    queryKey: ["search", searchTerm],
+    queryFn: async ({ pageParam }) => {
+      let data;
+      if (searchTerm) {
+        const response = await axiosPrivate.get(
+          `/videos?page=${pageParam}&query=${searchTerm}`,
+          {
+            withCredentials: true,
+          }
+        );
+
+        data = response.data;
+      }
+      return data;
+    },
+    initialPageParam: 1,
+    getNextPageParam: (lastPage) => lastPage?.data?.nextPage ?? null,
+  });
+};

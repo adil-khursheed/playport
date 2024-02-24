@@ -8,7 +8,7 @@ import { axiosPrivate } from "../api/axios";
 export const useGetVideoComments = (videoId) => {
   return useInfiniteQuery({
     queryKey: ["comments"],
-    queryFn: async ({ pageParam = 1 }) => {
+    queryFn: async ({ pageParam }) => {
       const response = await axiosPrivate.get(
         `/comments/${videoId}?page=${pageParam}`,
         {
@@ -18,6 +18,7 @@ export const useGetVideoComments = (videoId) => {
 
       return response.data;
     },
+    initialPageParam: 1,
     getNextPageParam: (lastPage) => lastPage?.data?.nextPage || undefined,
   });
 };

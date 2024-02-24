@@ -11,8 +11,6 @@ const Home = () => {
     isFetching,
   } = useGetAllVideos();
 
-  console.log(videoData);
-
   return (
     <>
       {isLoading || isFetching ? (
