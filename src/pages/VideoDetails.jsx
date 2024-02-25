@@ -12,6 +12,7 @@ import { useGetVideoComments } from "../features/commentApi";
 import InfiniteScroll from "react-infinite-scroller";
 import { useLikeUnlikeVideo } from "../features/likeApi";
 import { toast } from "react-toastify";
+import { useToggleSubscription } from "../features/subscriptionApi";
 
 const VideoDetails = () => {
   const { videoId } = useParams();
@@ -28,6 +29,18 @@ const VideoDetails = () => {
   } = useGetVideoComments(videoId);
 
   const { mutateAsync: likeUnlikeVideo } = useLikeUnlikeVideo(videoId);
+
+  const {
+    mutateAsync: toggleSubscription,
+    isPending: toggleSubscriptionLoading,
+  } = useToggleSubscription({ channelId: video?.data?.owner?._id });
+
+  const handleToggleSubscription = async () => {
+    const response = await toggleSubscription();
+    if (response) {
+      toast.success(response?.message);
+    }
+  };
 
   const likeUnlikeVideoHandler = async () => {
     const response = await likeUnlikeVideo();
@@ -118,17 +131,24 @@ const VideoDetails = () => {
                         : "bg-transparent"
                     }`}
                     textColor="text-dark-1 dark:text-light-1"
-                    className="px-4 flex items-center gap-1 border border-light-2 dark:border-dark-2 rounded-r-full rounded-l-full">
-                    {video?.data?.owner?.isSubscribed ? (
-                      <BellAlertIcon className="w-6 h-6" />
+                    className="px-4 flex items-center gap-1 border border-light-2 dark:border-dark-2 rounded-r-full rounded-l-full"
+                    onClick={handleToggleSubscription}>
+                    {toggleSubscriptionLoading ? (
+                      <Loader />
                     ) : (
-                      <BellIcon className="w-6 h-6" />
+                      <>
+                        {video?.data?.owner?.isSubscribed ? (
+                          <BellAlertIcon className="w-6 h-6" />
+                        ) : (
+                          <BellIcon className="w-6 h-6" />
+                        )}
+                        <span className="font-medium">
+                          {video?.data?.owner?.isSubscribed
+                            ? "Subscribed"
+                            : "Subscribe"}
+                        </span>
+                      </>
                     )}
-                    <span className="font-medium">
-                      {video?.data?.owner?.isSubscribed
-                        ? "Subscribed"
-                        : "Subscribe"}
-                    </span>
                   </Button>
                 )}
               </div>

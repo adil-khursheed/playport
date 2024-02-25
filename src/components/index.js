@@ -13,6 +13,8 @@ import Comments from "./Comments";
 import CommentForm from "./CommentForm";
 import VideoPostList from "./VideoPostList";
 import SearchForm from "./SearchForm";
+import TabNavItem from "./profile-tabs/TabNavItem";
+import TabContent from "./profile-tabs/TabContent";
 
 export {
   Loader,
@@ -30,4 +32,6 @@ export {
   CommentForm,
   VideoPostList,
   SearchForm,
+  TabNavItem,
+  TabContent,
 };

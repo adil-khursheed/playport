@@ -12,7 +12,7 @@ export const useGetAllVideos = () => {
       return response?.data;
     },
     initialPageParam: 1,
-    getNextPageParam: (lastPage) => lastPage?.data?.nextPage ?? null,
+    getNextPageParam: (lastPage) => lastPage.data.nextPage || null,
   });
 };
 
@@ -48,5 +48,24 @@ export const useGetVideosByQuery = (searchTerm) => {
     },
     initialPageParam: 1,
     getNextPageParam: (lastPage) => lastPage?.data?.nextPage ?? null,
+  });
+};
+
+export const useGetVideosByUserId = (userId) => {
+  return useInfiniteQuery({
+    queryKey: ["videos"],
+    queryFn: async ({ pageParam }) => {
+      const response = await axiosPrivate.get(
+        `/videos?page=${pageParam}&userId=${userId}`,
+        {
+          withCredentials: true,
+        }
+      );
+
+      return response.data;
+    },
+    initialPageParam: 1,
+    getNextPageParam: (lastPage) => lastPage?.data?.nextPage ?? null,
+    enabled: !!userId,
   });
 };

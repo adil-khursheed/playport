@@ -49,7 +49,7 @@ export const useLogoutUser = () => {
 
 export const useGetCurrentUser = () => {
   return useQuery({
-    queryKey: ["user"],
+    queryKey: ["getCurrentUser"],
     queryFn: async () => {
       const response = await axiosPrivate.get("/users/current-user", {
         withCredentials: true,
@@ -62,7 +62,7 @@ export const useGetCurrentUser = () => {
 
 export const useGetUserChannelProfile = (username) => {
   return useQuery({
-    queryKey: ["user"],
+    queryKey: ["getUserProfile"],
     queryFn: async () => {
       const response = await axiosPrivate.get(`/users/c/${username}`, {
         withCredentials: true,
