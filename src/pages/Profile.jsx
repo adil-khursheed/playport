@@ -6,11 +6,13 @@ import {
 import {
   Button,
   Loader,
+  PlaylistTab,
   TabContent,
   TabNavItem,
-  VideoPostCard,
+  TweetTab,
+  VideoTab,
 } from "../components/index";
-import { BellAlertIcon, PlayCircleIcon } from "@heroicons/react/24/solid";
+import { BellAlertIcon } from "@heroicons/react/24/solid";
 import { BellIcon, PencilSquareIcon } from "@heroicons/react/24/outline";
 import { useToggleSubscription } from "../features/subscriptionApi";
 import { toast } from "react-toastify";
@@ -33,7 +35,7 @@ const Profile = () => {
   const {
     mutateAsync: toggleSubscription,
     isPending: toggleSubscriptionLoading,
-  } = useToggleSubscription({ channelId: profileData?.data?._id });
+  } = useToggleSubscription({ channelId: userId });
 
   const {
     data: userVideos,
@@ -74,7 +76,7 @@ const Profile = () => {
         </div>
 
         <div className="flex items-start gap-6">
-          <div className="w-36 h-w-36 rounded-full">
+          <div className="w-28 h-28 md:w-36 md:h-36 rounded-full">
             <img
               src={profileData?.data?.avatar?.url}
               alt={profileData?.data?.fullName}
@@ -82,10 +84,10 @@ const Profile = () => {
             />
           </div>
           <div className="flex flex-col justify-start gap-3">
-            <h1 className="text-dark-1 dark:text-light-1 font-semibold text-3xl capitalize">
+            <h1 className="text-dark-1 dark:text-light-1 font-semibold text-xl md:text-3xl capitalize">
               {profileData?.data?.fullName}
             </h1>
-            <p className="flex items-center gap-3 text-dark-2 dark:text-light-2 text-base">
+            <p className="flex items-center gap-1 sm:gap-3 text-dark-2 dark:text-light-2 text-base">
               <span>{profileData?.data?.username}</span>
               <span>&middot;</span>
               <span>
@@ -139,7 +141,7 @@ const Profile = () => {
                   bgColor="bg-light-2 dark:bg-dark-2"
                   textColor="text-dark-1 dark:text-light-1"
                   className="px-4 flex items-center justify-center gap-1 border border-light-2 dark:border-dark-2 rounded-r-full rounded-l-full">
-                  <PencilSquareIcon className="w-5 h-5" />
+                  <PencilSquareIcon className="w-4 h-4 md:w-5 md:h-5" />
                   <span>Edit</span>
                 </Button>
               )}
@@ -176,36 +178,20 @@ const Profile = () => {
           </ul>
           <hr className="border-light-2 dark:border-dark-2 my-1" />
           <div className="w-full">
-            {userVideosLoading ? (
-              <Loader />
-            ) : (
-              <>
-                <TabContent id={"videos"} activeTab={activeTab}>
-                  {userVideos?.pages?.map((page, index) => (
-                    <div key={index} className="w-full">
-                      {page?.data?.videos.length > 0 ? (
-                        <div
-                          key={index}
-                          className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
-                          {page?.data?.videos.map((video) => (
-                            <VideoPostCard key={video?._id} video={video} />
-                          ))}
-                        </div>
-                      ) : (
-                        <div className="max-w-96 w-full mx-auto text-center flex flex-col items-center justify-center gap-2 mt-10 text-dark-2 dark:text-light-2">
-                          <PlayCircleIcon className="w-8 h-8" />
-                          <h5>No videos uploaded</h5>
-                          <p>
-                            This page has yet to upload a video. Search another
-                            page in order to find more videos.
-                          </p>
-                        </div>
-                      )}
-                    </div>
-                  ))}
-                </TabContent>
-              </>
-            )}
+            <TabContent id={"videos"} activeTab={activeTab}>
+              <VideoTab
+                userVideos={userVideos}
+                userVideosLoading={userVideosLoading}
+              />
+            </TabContent>
+
+            <TabContent id={"playlist"} activeTab={activeTab}>
+              <PlaylistTab userId={userId} />
+            </TabContent>
+
+            <TabContent id={"tweets"} activeTab={activeTab}>
+              <TweetTab userId={userId} />
+            </TabContent>
           </div>
         </div>
       </InfiniteScroll>

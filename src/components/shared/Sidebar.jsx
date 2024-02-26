@@ -12,7 +12,7 @@ const Sidebar = () => {
             <NavLink key={link.route} to={link.route}>
               {({ isActive }) => (
                 <li
-                  className={`flex items-center justify-center md:justify-normal gap-3 w-full h-12 px-3 rounded-full ${
+                  className={`flex items-center justify-center md:justify-normal gap-3 w-full h-12 px-3 rounded-md lg:rounded-full ${
                     isActive ? "bg-light-2 dark:bg-dark-2" : ""
                   }`}>
                   <div

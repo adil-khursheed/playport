@@ -44,3 +44,25 @@ export const useLikeUnlikeComment = ({ commentId }) => {
     },
   });
 };
+
+export const useLikeUnlikeTweets = ({ tweetId }) => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async () => {
+      const response = await axiosPrivate.post(
+        `/likes/toggle/t/${tweetId}`,
+        {},
+        {
+          withCredentials: true,
+        }
+      );
+
+      return response.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["tweet"],
+      });
+    },
+  });
+};

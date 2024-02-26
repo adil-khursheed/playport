@@ -15,6 +15,7 @@ import {
   LikedVideos,
   VideoDetails,
   SearchResult,
+  Playlist,
 } from "./pages";
 import { PersistLogin, AuthLayout } from "./components";
 import "react-toastify/dist/ReactToastify.css";
@@ -78,6 +79,14 @@ const router = createBrowserRouter([
             element: (
               <AuthLayout>
                 <SearchResult />
+              </AuthLayout>
+            ),
+          },
+          {
+            path: "/playlists/:playlistId",
+            element: (
+              <AuthLayout>
+                <Playlist />
               </AuthLayout>
             ),
           },

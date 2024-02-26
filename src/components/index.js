@@ -15,6 +15,11 @@ import VideoPostList from "./VideoPostList";
 import SearchForm from "./SearchForm";
 import TabNavItem from "./profile-tabs/TabNavItem";
 import TabContent from "./profile-tabs/TabContent";
+import VideoTab from "./profile-tabs/VideoTab";
+import PlaylistTab from "./profile-tabs/PlaylistTab";
+import PlaylistCard from "./PlaylistCard";
+import TweetTab from "./profile-tabs/TweetTab";
+import TweetCard from "./TweetCard";
 
 export {
   Loader,
@@ -34,4 +39,9 @@ export {
   SearchForm,
   TabNavItem,
   TabContent,
+  VideoTab,
+  PlaylistTab,
+  PlaylistCard,
+  TweetTab,
+  TweetCard,
 };
