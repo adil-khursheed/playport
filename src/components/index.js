@@ -20,6 +20,9 @@ import PlaylistTab from "./profile-tabs/PlaylistTab";
 import PlaylistCard from "./PlaylistCard";
 import TweetTab from "./profile-tabs/TweetTab";
 import TweetCard from "./TweetCard";
+import UploadVideoModal from "./UploadVideoModal";
+import VideoUploader from "./VideoUploader";
+import ToggleSwitch from "./ToggleSwitch";
 
 export {
   Loader,
@@ -44,4 +47,7 @@ export {
   PlaylistCard,
   TweetTab,
   TweetCard,
+  UploadVideoModal,
+  VideoUploader,
+  ToggleSwitch,
 };

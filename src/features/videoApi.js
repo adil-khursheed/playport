@@ -1,4 +1,9 @@
-import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
+import {
+  useInfiniteQuery,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
 import { axiosPrivate } from "../api/axios";
 
 export const useGetAllVideos = () => {
@@ -67,5 +72,27 @@ export const useGetVideosByUserId = (userId) => {
     initialPageParam: 1,
     getNextPageParam: (lastPage) => lastPage?.data?.nextPage ?? null,
     enabled: !!userId,
+  });
+};
+
+export const useUploadAVideo = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data) => {
+      const response = await axiosPrivate.post(`/videos`, data, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+        withCredentials: true,
+      });
+
+      return response.data;
+    },
+    onSuccess: (data) => {
+      console.log(data);
+      queryClient.invalidateQueries({
+        queryKey: ["videos"],
+      });
+    },
   });
 };

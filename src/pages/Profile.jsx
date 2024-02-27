@@ -10,6 +10,7 @@ import {
   TabContent,
   TabNavItem,
   TweetTab,
+  UploadVideoModal,
   VideoTab,
 } from "../components/index";
 import { BellAlertIcon } from "@heroicons/react/24/solid";
@@ -22,6 +23,7 @@ import { useGetVideosByUserId } from "../features/videoApi";
 
 const Profile = () => {
   const [activeTab, setActiveTab] = useState("videos");
+  const [uploadVideoModal, setUploadVideoModal] = useState(false);
   const { username } = useParams();
 
   const { data: currentUser, isLoading: currentUserLoading } =
@@ -66,7 +68,7 @@ const Profile = () => {
         hasMore={!userVideosLoading && hasNextPage}
         pageStart={1}
         loader={<Loader />}
-        className="w-full h-full px-4 py-3 flex flex-col justify-start gap-3 overflow-x-hidden overflow-y-auto">
+        className="relative w-full h-full px-4 py-3 flex flex-col justify-start gap-3 overflow-x-hidden overflow-y-auto">
         <div className="w-full h-40 aspect-video rounded-lg border border-light-2 dark:border-dark-2">
           <img
             src={profileData?.data?.coverImage?.url}
@@ -182,6 +184,9 @@ const Profile = () => {
               <VideoTab
                 userVideos={userVideos}
                 userVideosLoading={userVideosLoading}
+                currentUserId={currentUser?.data?._id}
+                profileUserId={profileData?.data?._id}
+                setUploadVideoModal={setUploadVideoModal}
               />
             </TabContent>
 
@@ -192,8 +197,16 @@ const Profile = () => {
             <TabContent id={"tweets"} activeTab={activeTab}>
               <TweetTab userId={userId} />
             </TabContent>
+
+            <TabContent id={"subscribed"} activeTab={activeTab}>
+              Subscribed
+            </TabContent>
           </div>
         </div>
+
+        {uploadVideoModal && (
+          <UploadVideoModal setUploadVideoModal={setUploadVideoModal} />
+        )}
       </InfiniteScroll>
     </>
   );

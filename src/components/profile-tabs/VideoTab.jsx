@@ -1,7 +1,13 @@
-import { PlayCircleIcon } from "@heroicons/react/24/solid";
-import { VideoPostCard, Loader } from "../index";
+import { ArrowUpTrayIcon, PlayCircleIcon } from "@heroicons/react/24/solid";
+import { VideoPostCard, Loader, Button } from "../index";
 
-const VideoTab = ({ userVideosLoading, userVideos }) => {
+const VideoTab = ({
+  userVideosLoading,
+  userVideos,
+  currentUserId,
+  profileUserId,
+  setUploadVideoModal,
+}) => {
   return (
     <>
       {userVideosLoading ? (
@@ -19,13 +25,23 @@ const VideoTab = ({ userVideosLoading, userVideos }) => {
                   ))}
                 </div>
               ) : (
-                <div className="max-w-96 w-full mx-auto text-center flex flex-col items-center justify-center gap-2 mt-10 text-dark-2 dark:text-light-2">
+                <div className="max-w-96 w-full mx-auto text-center flex flex-col items-center justify-center gap-2 my-10 text-dark-2 dark:text-light-2">
                   <PlayCircleIcon className="w-8 h-8" />
                   <h5>No videos uploaded</h5>
                   <p>
                     This page has yet to upload a video. Search another page in
                     order to find more videos.
                   </p>
+                  {currentUserId === profileUserId && (
+                    <Button
+                      bgColor="bg-dark-2 dark:bg-light-2"
+                      textColor="text-light-1 dark:text-dark-2"
+                      className="flex items-center gap-2 mt-5"
+                      onClick={() => setUploadVideoModal(true)}>
+                      <ArrowUpTrayIcon className="w-4 h-4" />
+                      <span>New Video</span>
+                    </Button>
+                  )}
                 </div>
               )}
             </div>

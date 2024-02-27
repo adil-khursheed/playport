@@ -16,6 +16,7 @@ import {
   VideoDetails,
   SearchResult,
   Playlist,
+  AdminDashboard,
 } from "./pages";
 import { PersistLogin, AuthLayout } from "./components";
 import "react-toastify/dist/ReactToastify.css";
@@ -87,6 +88,14 @@ const router = createBrowserRouter([
             element: (
               <AuthLayout>
                 <Playlist />
+              </AuthLayout>
+            ),
+          },
+          {
+            path: "/dashboard",
+            element: (
+              <AuthLayout>
+                <AdminDashboard />
               </AuthLayout>
             ),
           },

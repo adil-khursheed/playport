@@ -1,8 +1,11 @@
 import {
   ArrowLeftIcon,
+  ChartPieIcon,
   MagnifyingGlassIcon,
   MoonIcon,
   SunIcon,
+  ArrowRightStartOnRectangleIcon,
+  UserIcon,
 } from "@heroicons/react/24/outline";
 import { ThemeState } from "../../context/ThemeContext";
 import { Link, useNavigate } from "react-router-dom";
@@ -10,10 +13,6 @@ import { Button, Loader, SearchForm } from "../index";
 import { useEffect, useRef, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import { useLogoutUser } from "../../features/authApi";
-import {
-  ArrowRightStartOnRectangleIcon,
-  UserIcon,
-} from "@heroicons/react/24/outline";
 
 const Header = ({ currentUser }) => {
   const [toggleModal, setToggleModal] = useState(false);
@@ -150,6 +149,14 @@ const Header = ({ currentUser }) => {
                     </p>
                   </div>
 
+                  <div>
+                    <Link to={`/dashboard`} className="flex items-center gap-2">
+                      <span>
+                        <ChartPieIcon className="w-5 h-5 text-dark-1 dark:text-light-1" />
+                      </span>
+                      <span>Dashboard</span>
+                    </Link>
+                  </div>
                   <div>
                     <Link
                       to={`/profile/${currentUser?.username}`}

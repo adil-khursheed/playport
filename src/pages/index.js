@@ -6,6 +6,7 @@ import LikedVideos from "./LikedVideos";
 import VideoDetails from "./VideoDetails";
 import SearchResult from "./SearchResult";
 import Playlist from "./Playlist";
+import AdminDashboard from "./AdminDashboard";
 
 export {
   Register,
@@ -16,4 +17,5 @@ export {
   VideoDetails,
   SearchResult,
   Playlist,
+  AdminDashboard,
 };

@@ -60,3 +60,12 @@ export function formatTime(seconds) {
 
   return formattedHours + formattedMinutes + ":" + formattedSeconds;
 }
+
+export function bytesToMB(bytes) {
+  if (typeof bytes !== "number" || isNaN(bytes) || bytes < 0) {
+    throw new Error("Input must be a non-negative number");
+  }
+
+  const megabytes = bytes / (1024 * 1024);
+  return megabytes.toFixed(2); // Keep two decimal places
+}
