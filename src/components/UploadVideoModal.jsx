@@ -1,6 +1,6 @@
 import { toast } from "react-toastify";
 import { useUploadAVideo } from "../features/videoApi";
-import { Button, Input, VideoUploader } from "./index";
+import { Button, FileUploader, Input } from "./index";
 import { useForm, Controller } from "react-hook-form";
 import { useState } from "react";
 import { CheckCircleIcon, FilmIcon } from "@heroicons/react/24/solid";
@@ -39,7 +39,7 @@ const UploadVideoModal = ({ setUploadVideoModal }) => {
   };
 
   return (
-    <div className="absolute left-0 top-0 right-0 bottom-0 h-screen bg-dark-2 bg-opacity-80">
+    <div className="absolute left-0 top-0 right-0 bottom-0 bg-dark-2 bg-opacity-80 flex items-center justify-center">
       <div className="max-w-3xl w-full mx-auto py-2 bg-light-1 dark:bg-dark-1 my-4 rounded-md">
         {uploadingVideo ? (
           <div className="w-full px-3 text-dark-1 dark:text-light-1">
@@ -85,8 +85,9 @@ const UploadVideoModal = ({ setUploadVideoModal }) => {
           <form
             onSubmit={handleSubmit(onVideoSubmit)}
             className="flex flex-col justify-start gap-2 w-full h-[500px] overflow-x-hidden overflow-y-auto px-3 bg-light-1 dark:bg-dark-1">
-            <div className="flex items-center justify-between gap-2 py-3 border-b border-b-light-2 dark:border-b-dark-2">
-              <h4 className="font-semibold text-lg text-dark-2 dark:text-light-2">
+            <div className="flex items-center justify-between gap-2 py-3 border-b border-b-dark-2 dark:border-b-light-2">
+              <h4 className="font-semibold text-lg text-dark-2 dark:text-light-2 flex items-center gap-2">
+                <FilmIcon className="w-6 h-6" />
                 Upload Video
               </h4>
               <div className="flex items-center gap-2">
@@ -103,7 +104,10 @@ const UploadVideoModal = ({ setUploadVideoModal }) => {
                 name="videoFile"
                 control={control}
                 render={({ field }) => (
-                  <VideoUploader fieldChange={field.onChange} />
+                  <FileUploader
+                    fieldChange={field.onChange}
+                    action={"videoUpload"}
+                  />
                 )}
               />
             </div>
@@ -111,7 +115,9 @@ const UploadVideoModal = ({ setUploadVideoModal }) => {
               <Input
                 type="file"
                 label="Thumbnail"
-                className="pl-0 pr-0"
+                className="pl-0 pr-0 dark:text-light-1"
+                inputWrapperClassName="dark:border-light-2"
+                labelClassName="text-dark-2 dark:text-light-2"
                 {...register("thumbnail", { required: true })}
               />
             </div>
@@ -119,17 +125,21 @@ const UploadVideoModal = ({ setUploadVideoModal }) => {
               <Input
                 type="text"
                 label="Title"
-                className="pl-0 pr-0"
+                className="pl-0 pr-0 dark:text-light-1"
+                inputWrapperClassName="dark:border-light-2"
+                labelClassName="text-dark-2 dark:text-light-2"
                 {...register("title", { required: true })}
               />
             </div>
             <div className="flex flex-col justify-start gap-1">
-              <label htmlFor="description" className="font-medium">
+              <label
+                htmlFor="description"
+                className="font-medium text-dark-2 dark:text-light-2">
                 Description
               </label>
               <textarea
                 id="description"
-                className="border border-dark-2 dark:border-light-2 outline-none focus:outline-none rounded-lg px-3 py-2"
+                className="border text-dark-1 dark:text-light-1 border-dark-2 dark:border-light-2 bg-transparent outline-none focus:outline-none rounded-lg px-3 py-2"
                 {...register("description", { required: true })}></textarea>
             </div>
           </form>

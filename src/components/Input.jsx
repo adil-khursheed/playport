@@ -7,7 +7,9 @@ const Input = forwardRef(function Input(
     icon2,
     iconWidth = "w-5",
     iconHeight = "h-5",
-    iconClassName,
+    iconClassName = "",
+    labelClassName = "",
+    inputWrapperClassName = "",
     onClick,
     type = "text",
     className = "",
@@ -20,12 +22,15 @@ const Input = forwardRef(function Input(
   return (
     <div className="w-full flex flex-col">
       {label && (
-        <label htmlFor={id} className="inline-block mb-1 font-medium">
+        <label
+          htmlFor={id}
+          className={`inline-block mb-1 font-medium ${labelClassName}`}>
           {label}
         </label>
       )}
 
-      <div className="w-full flex items-center border border-dark-1 rounded-lg px-3">
+      <div
+        className={`w-full flex items-center border border-dark-2 rounded-lg px-3 ${inputWrapperClassName}`}>
         {icon1 && (
           <div className={`${iconClassName} ${iconWidth} ${iconHeight}`}>
             {icon1}

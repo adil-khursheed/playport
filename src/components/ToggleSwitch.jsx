@@ -1,7 +1,7 @@
-const ToggleSwitch = () => {
+const ToggleSwitch = ({ checked, onChange }) => {
   return (
-    <label className="switch">
-      <input type="checkbox" />
+    <label className="switch cursor-pointer">
+      <input type="checkbox" checked={checked} onChange={onChange} />
       <span className="slider"></span>
     </label>
   );

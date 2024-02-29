@@ -23,7 +23,7 @@ export const useGetAllVideos = () => {
 
 export const useGetVideoById = (videoId) => {
   return useQuery({
-    queryKey: ["videos"],
+    queryKey: ["videos", videoId],
     queryFn: async () => {
       const response = await axiosPrivate.get(`/videos/${videoId}`, {
         withCredentials: true,
@@ -88,10 +88,59 @@ export const useUploadAVideo = () => {
 
       return response.data;
     },
-    onSuccess: (data) => {
-      console.log(data);
+    onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ["videos"],
+      });
+
+      queryClient.invalidateQueries({
+        queryKey: ["channelVideos"],
+      });
+    },
+  });
+};
+
+export const useUpdateAVideo = ({ videoId }) => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data) => {
+      const response = await axiosPrivate.patch(`/videos/${videoId}`, data, {
+        withCredentials: true,
+      });
+
+      return response.data;
+    },
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({
+        queryKey: ["videos", data.data._id],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["videos"],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["channelVideos"],
+      });
+    },
+  });
+};
+
+export const useDeleteVideo = ({ videoId }) => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async () => {
+      const response = await axiosPrivate.delete(`/videos/${videoId}`, {
+        withCredentials: true,
+      });
+
+      return response.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["videos"],
+      });
+
+      queryClient.invalidateQueries({
+        queryKey: ["channelVideos"],
       });
     },
   });

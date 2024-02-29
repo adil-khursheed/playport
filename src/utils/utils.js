@@ -69,3 +69,14 @@ export function bytesToMB(bytes) {
   const megabytes = bytes / (1024 * 1024);
   return megabytes.toFixed(2); // Keep two decimal places
 }
+
+export function convertDateFormat(inputDate) {
+  const dateObject = new Date(inputDate);
+
+  const day = String(dateObject.getUTCDate()).padStart(2, "0");
+  const month = String(dateObject.getUTCMonth() + 1).padStart(2, "0");
+  const year = dateObject.getUTCFullYear();
+
+  const formattedDate = `${day}/${month}/${year}`;
+  return formattedDate;
+}

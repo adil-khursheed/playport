@@ -3,9 +3,9 @@ import { Button } from "./index";
 import { useDropzone } from "react-dropzone";
 import { ArrowUpTrayIcon } from "@heroicons/react/24/solid";
 
-const VideoUploader = ({ fieldChange }) => {
+const FileUploader = ({ fieldChange, mediaUrl, action }) => {
   const [file, setFile] = useState([]);
-  const [fileUrl, setFileUrl] = useState("");
+  const [fileUrl, setFileUrl] = useState(mediaUrl || "");
 
   const onDrop = useCallback(
     (acceptedFiles) => {
@@ -18,32 +18,35 @@ const VideoUploader = ({ fieldChange }) => {
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
-    accept: {
-      "video/*": [".mp4"],
-    },
     maxFiles: 1,
   });
   return (
     <div
       {...getRootProps()}
-      className="flex flex-col justify-center items-center border border-gray-200 rounded-lg p-5 cursor-pointer">
+      className="flex flex-col justify-center items-center border border-dark-2 dark:border-light-2 rounded-lg p-5 cursor-pointer">
       <input {...getInputProps()} />
       {fileUrl ? (
         <>
           <div>
-            <video>
-              <source src={fileUrl} />
-            </video>
+            {action === "videoUpload" ? (
+              <video>
+                <source src={fileUrl} />
+              </video>
+            ) : (
+              <img src={fileUrl} />
+            )}
           </div>
-          <p className="text-sm text-gray-400 p-4 w-full text-center">
-            Click or drag photo to replace
+          <p className="text-sm text-dark-2 dark:text-light-2 p-4 w-full text-center ">
+            Click or drag {action === "videoUpload" ? "video" : "thumbnail"} to
+            replace
           </p>
         </>
       ) : (
-        <div className="flex flex-col justify-center items-center">
+        <div className="flex flex-col justify-center items-center text-dark-2 dark:text-light-2">
           <ArrowUpTrayIcon className="w-10 h-10" />
           <h3 className="text-gray-400 text-base mb-2 mt-4">
-            Drag and drop video files to upload
+            Drag and drop{" "}
+            {action === "videoUpload" ? "video files" : "thumbnail"} to upload
           </h3>
           <Button type="button" className={"h-12 px-5 text-sm"}>
             Select from computer
@@ -54,4 +57,4 @@ const VideoUploader = ({ fieldChange }) => {
   );
 };
 
-export default VideoUploader;
+export default FileUploader;
