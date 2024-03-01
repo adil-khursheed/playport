@@ -61,21 +61,23 @@ const AdminDashboard = () => {
   };
 
   if (currentUserLoading) {
-    return <Loader />;
+    return (
+      <Loader className="w-full h-full flex justify-center items-center" />
+    );
   }
 
   return (
     <>
       {statsLoading ? (
-        <Loader />
+        <Loader className="w-full h-full flex justify-center items-center" />
       ) : (
-        <section className="relative p-3 w-full flex flex-col justify-start gap-4 overflow-x-hidden overflow-y-auto">
+        <section className="p-3 w-full flex flex-col justify-start gap-4 overflow-x-hidden overflow-y-auto">
           <div className="w-full flex items-center justify-between gap-2">
             <h2 className="text-lg md:text-3xl text-dark-1 dark:text-light-1 font-medium">
               Welcome Back, {currentUser?.data?.fullName}
             </h2>
             <Button
-              className="flex items-center gap-2"
+              className="flex items-center gap-1 sm:gap-2 text-xs sm:text-base"
               onClick={() => setUploadVideoModal(true)}>
               <ArrowUpTrayIcon className="w-5 h-5" />
               <span>Upload Video</span>

@@ -54,11 +54,15 @@ const Profile = () => {
   };
 
   if (profileLoading) {
-    return <Loader />;
+    return (
+      <Loader className="w-full h-full flex justify-center items-center" />
+    );
   }
 
   if (currentUserLoading) {
-    return <Loader />;
+    return (
+      <Loader className="w-full h-full flex justify-center items-center" />
+    );
   }
 
   return (
@@ -68,7 +72,7 @@ const Profile = () => {
         hasMore={!userVideosLoading && hasNextPage}
         pageStart={1}
         loader={<Loader />}
-        className="relative w-full h-full px-4 py-3 flex flex-col justify-start gap-3 overflow-x-hidden overflow-y-auto">
+        className="w-full h-full px-4 py-3 flex flex-col justify-start gap-3 overflow-x-hidden overflow-y-auto">
         <div className="w-full h-40 aspect-video rounded-lg border border-light-2 dark:border-dark-2">
           <img
             src={profileData?.data?.coverImage?.url}

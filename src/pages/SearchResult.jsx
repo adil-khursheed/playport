@@ -23,7 +23,7 @@ const SearchResult = () => {
           loadMore={fetchNextPage}
           hasMore={hasNextPage}
           pageStart={1}
-          className="w-full px-3 py-2">
+          className="w-full px-3 py-2 overflow-x-hidden overflow-y-auto">
           {searchedVideoData?.pages.map((page, index) => (
             <div key={index}>
               {page?.data?.videos.map((video) => (

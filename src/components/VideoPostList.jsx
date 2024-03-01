@@ -5,15 +5,15 @@ const VideoPostList = ({ video }) => {
   return (
     <Link
       to={`/videos/${video?._id}`}
-      className=" w-full flex items-start gap-5 mb-5">
-      <div className="w-64 h-44 rounded-lg border border-light-2 dark:border-dark-2">
+      className=" w-full flex flex-col sm:flex-row items-start gap-5 mb-5">
+      <div className="sm:basis-64 basis-full aspect-video rounded-lg border border-light-2 dark:border-dark-2">
         <img
           src={video?.thumbnail?.url}
           alt={video?.title}
           className="w-full h-full object-contain rounded-lg"
         />
       </div>
-      <div className="flex-1 flex flex-col justify-start gap-5">
+      <div className="basis-1/2 w-full flex flex-col justify-start gap-2 sm:gap-5">
         <div>
           <h2 className="font-medium text-xl text-dark-1 dark:text-light-1">
             {video?.title}

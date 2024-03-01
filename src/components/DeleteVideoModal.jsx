@@ -21,7 +21,7 @@ const DeleteVideoModal = ({ video, setDeleteVideoModal }) => {
   };
 
   return (
-    <section className="absolute top-0 left-0 right-0 bottom-0 bg-dark-2 bg-opacity-70 flex items-center justify-center px-3">
+    <section className="absolute z-[99999] top-0 left-0 right-0 bottom-0 bg-dark-2 bg-opacity-70 flex items-center justify-center px-3">
       <div className="max-w-lg w-full bg-light-1 dark:bg-dark-1 rounded-lg px-4 py-5 flex flex-col justify-start gap-5">
         <div className="w-full flex items-start justify-between">
           <div className="w-10 h-10 rounded-full bg-red-light text-red-dark flex items-center justify-center">

@@ -25,7 +25,7 @@ const EditVideoModal = ({ setEditVideoModal, video }) => {
     formData.append("thumbnail", data.thumbnail[0]);
 
     try {
-      const response = await updateVideoApi({ ...formData });
+      const response = await updateVideoApi({ ...data, formData });
       if (response) {
         toast.success(response?.message);
         setEditVideoModal(false);
@@ -35,7 +35,7 @@ const EditVideoModal = ({ setEditVideoModal, video }) => {
     }
   };
   return (
-    <section className="absolute left-0 top-0 right-0 bottom-0 bg-dark-2 bg-opacity-70 flex items-center justify-center">
+    <section className="absolute z-[99999] left-0 top-0 right-0 bottom-0 bg-dark-2 bg-opacity-70 flex items-center justify-center">
       <div className="max-w-2xl w-full bg-light-1 dark:bg-dark-1 rounded-lg">
         {updatingVideo ? (
           <Loader />

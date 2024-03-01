@@ -175,7 +175,11 @@ const RegisterComponent = () => {
                 />
               </div>
               <div>
-                <Button type="submit" className="w-full">
+                <Button
+                  bgColor="bg-dark-1"
+                  textColor="text-light-1"
+                  type="submit"
+                  className="w-full">
                   Register
                 </Button>
               </div>

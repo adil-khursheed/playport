@@ -5,7 +5,7 @@ const VideoPostCard = ({ video }) => {
   return (
     <div className="flex flex-col justify-start gap-3 mb-5">
       <Link to={`/videos/${video?._id}`}>
-        <div className="relative w-full h-44 aspect-video md:h-56 rounded border border-light-2 dark:border-dark-2">
+        <div className="relative aspect-video rounded border border-light-2 dark:border-dark-2">
           <img
             src={video?.thumbnail?.url}
             alt={video?.title}

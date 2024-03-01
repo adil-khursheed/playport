@@ -25,7 +25,7 @@ const VideoTab = ({
                   ))}
                 </div>
               ) : (
-                <div className="max-w-96 w-full mx-auto text-center flex flex-col items-center justify-center gap-2 my-10 text-dark-2 dark:text-light-2">
+                <div className="max-w-96 w-full mx-auto text-center flex flex-col items-center justify-center gap-2 my-5 text-dark-2 dark:text-light-2">
                   <PlayCircleIcon className="w-8 h-8" />
                   <h5>No videos uploaded</h5>
                   <p>
@@ -36,7 +36,7 @@ const VideoTab = ({
                     <Button
                       bgColor="bg-dark-2 dark:bg-light-2"
                       textColor="text-light-1 dark:text-dark-2"
-                      className="flex items-center gap-2 mt-5"
+                      className="flex items-center gap-2 mt-2"
                       onClick={() => setUploadVideoModal(true)}>
                       <ArrowUpTrayIcon className="w-4 h-4" />
                       <span>New Video</span>

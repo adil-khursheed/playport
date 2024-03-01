@@ -186,7 +186,7 @@ const Header = ({ currentUser }) => {
             <div className="absolute left-0 top-0 right-0 bottom-0 bg-light-1 dark:bg-dark-1 flex items-center md:hidden">
               <Button
                 bgColor="bg-transparent"
-                textColor="text-dark-1 dark:text"
+                textColor="text-dark-1 dark:text-light-1"
                 onClick={() => setSmallDeviceSearchBar(false)}>
                 <ArrowLeftIcon className="w-5 h-5" />
               </Button>

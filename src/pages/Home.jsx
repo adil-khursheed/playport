@@ -14,7 +14,7 @@ const Home = () => {
   return (
     <>
       {isLoading || isFetching ? (
-        <Loader />
+        <Loader className="w-full h-full flex justify-center items-center" />
       ) : (
         <InfiniteScroll
           className="w-full"

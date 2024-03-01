@@ -103,10 +103,14 @@ export const useUploadAVideo = () => {
 export const useUpdateAVideo = ({ videoId }) => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async (data) => {
-      const response = await axiosPrivate.patch(`/videos/${videoId}`, data, {
-        withCredentials: true,
-      });
+    mutationFn: async ({ data }) => {
+      const response = await axiosPrivate.patch(
+        `/videos/${videoId}`,
+        { ...data },
+        {
+          withCredentials: true,
+        }
+      );
 
       return response.data;
     },

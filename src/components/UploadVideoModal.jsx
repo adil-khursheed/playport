@@ -39,7 +39,7 @@ const UploadVideoModal = ({ setUploadVideoModal }) => {
   };
 
   return (
-    <div className="absolute left-0 top-0 right-0 bottom-0 bg-dark-2 bg-opacity-80 flex items-center justify-center">
+    <div className="absolute z-[999999] left-0 top-0 right-0 bottom-0 bg-dark-2 bg-opacity-80 flex items-center justify-center p-3">
       <div className="max-w-3xl w-full mx-auto py-2 bg-light-1 dark:bg-dark-1 my-4 rounded-md">
         {uploadingVideo ? (
           <div className="w-full px-3 text-dark-1 dark:text-light-1">
