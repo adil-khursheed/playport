@@ -75,7 +75,7 @@ const LoginComponent = () => {
           <div className="flex flex-col items-center gap-4 max-w-md w-full p-6 bg-light-1 bg-opacity-50 backdrop-blur-[8px] border border-light-1 border-opacity-50 rounded-lg shadow-lg shadow-dark-1">
             <div className="w-full h-auto flex items-center justify-center">
               <img
-                src="/assets/youtube-dark-logo.svg"
+                src="/assets/playport-dark-logo.svg"
                 alt="Logo"
                 className="w-28"
               />
@@ -96,6 +96,7 @@ const LoginComponent = () => {
                   label="Username or Email"
                   placeholder="Enter username or email"
                   icon1={<UserIcon />}
+                  className="placeholder:text-light-2"
                   {...register("usernameOrEmail", {
                     required: [true, "Username or email required!"],
                   })}
@@ -105,6 +106,7 @@ const LoginComponent = () => {
                 <Input
                   label="Password"
                   placeholder="Enter password"
+                  className="placeholder:text-light-2"
                   type={togglePassword ? "text" : "password"}
                   icon1={<LockClosedIcon />}
                   icon2={togglePassword ? <EyeSlashIcon /> : <EyeIcon />}

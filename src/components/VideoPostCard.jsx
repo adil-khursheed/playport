@@ -35,7 +35,7 @@ const VideoPostCard = ({ video }) => {
               {video?.owner.fullName}
             </h4>
           </Link>
-          <p className="text-sm text-dark-2 dark:text-light-2 flex items-center gap-2">
+          <p className="text-xs text-dark-2 dark:text-light-2 flex items-center gap-2">
             {video?.views > 0 && (
               <span>
                 {video?.views} {video?.views === 1 ? "view" : "views"}

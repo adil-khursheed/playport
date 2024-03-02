@@ -63,10 +63,10 @@ const RegisterComponent = () => {
         <Loader className="w-full h-full bg-dark-1 flex items-center justify-center" />
       ) : (
         <div className="flex items-center justify-center h-full px-3">
-          <div className="flex flex-col items-center gap-4 max-w-md w-full p-6 bg-light-1 bg-opacity-50 backdrop-blur-[8px] border border-light-1 border-opacity-50 rounded-lg shadow-lg shadow-dark-1">
+          <div className="flex flex-col items-center gap-3 max-w-md w-full px-6 py-3 bg-light-1 bg-opacity-50 backdrop-blur-[8px] border border-light-1 border-opacity-50 rounded-lg shadow-lg shadow-dark-1">
             <div className="w-full h-auto flex items-center justify-center">
               <img
-                src="/assets/youtube-dark-logo.svg"
+                src="/assets/playport-dark-logo.svg"
                 alt="Logo"
                 className="w-28"
               />
@@ -142,7 +142,8 @@ const RegisterComponent = () => {
               <div>
                 <Input
                   label="Username"
-                  placeholder="Enter username"
+                  placeholder="johndoe"
+                  className="placeholder:text-light-2"
                   icon1={<UserIcon />}
                   {...register("username", { required: true })}
                 />
@@ -150,7 +151,8 @@ const RegisterComponent = () => {
               <div>
                 <Input
                   label="Email"
-                  placeholder="Enter your email address"
+                  placeholder="john@example.com"
+                  className="placeholder:text-light-2"
                   icon1={<EnvelopeIcon />}
                   {...register("email", { required: true })}
                 />
@@ -158,7 +160,8 @@ const RegisterComponent = () => {
               <div>
                 <Input
                   label="Full Name"
-                  placeholder="Enter your full name"
+                  placeholder="John Doe"
+                  className="placeholder:text-light-2"
                   icon1={<IdentificationIcon />}
                   {...register("fullName", { required: true })}
                 />
@@ -167,6 +170,7 @@ const RegisterComponent = () => {
                 <Input
                   label="Password"
                   placeholder="Enter password"
+                  className="placeholder:text-light-2"
                   type={togglePassword ? "text" : "password"}
                   icon1={<LockClosedIcon />}
                   icon2={togglePassword ? <EyeSlashIcon /> : <EyeIcon />}

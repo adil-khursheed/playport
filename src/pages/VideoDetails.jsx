@@ -79,7 +79,7 @@ const VideoDetails = () => {
                 controlsList="nodownload"
                 disablePictureInPicture
                 poster={video?.data?.thumbnail?.url}
-                className="w-full h-[250px] sm:h-[350px] md:h-[500px] aspect-video rounded-xl shadow-sm shadow-light-2 dark:shadow-dark-2 border border-light-2 dark:border-dark-2">
+                className="aspect-video bg-dark-1 rounded-xl shadow-sm shadow-light-2 dark:shadow-dark-2 border border-light-2 dark:border-dark-2">
                 <source src={video?.data?.videoFile?.url} />
               </video>
 
@@ -87,7 +87,7 @@ const VideoDetails = () => {
                 {video?.data?.title}
               </h2>
 
-              <div className="mt-3 flex items-center gap-10">
+              <div className="mt-3 flex items-center gap-5 md:gap-10">
                 <div className="flex items-center gap-3">
                   <div className="w-12 h-12 rounded-full">
                     <img

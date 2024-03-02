@@ -89,18 +89,18 @@ const Header = ({ currentUser }) => {
         <Loader />
       ) : (
         <header
-          className={`sticky top-0 left-0 right-0 z-10 flex items-center justify-between py-2 px-3 sm:px-5 bg-light-1 dark:bg-dark-1 border border-t-0 dark:border-dark-2 border-light-2`}
+          className={`sticky top-0 left-0 right-0 z-10 flex items-center justify-between py-[7px] px-3 sm:px-5 bg-light-1 dark:bg-dark-1 border border-t-0 dark:border-dark-2 border-light-2`}
           ref={smallDeviceSearchBarRef}>
-          <div>
+          <div className="w-16 sm:w-24 h-auto">
             <Link to={"/"}>
               <img
                 src={
                   theme === "dark"
-                    ? "/assets/youtube-light-logo.svg"
-                    : "/assets/youtube-dark-logo.svg"
+                    ? "/assets/playport-light-logo.svg"
+                    : "/assets/playport-dark-logo.svg"
                 }
                 alt="Logo"
-                className="sm:w-28 h-auto"
+                className="w-full"
               />
             </Link>
           </div>
