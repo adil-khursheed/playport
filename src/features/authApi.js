@@ -72,3 +72,16 @@ export const useGetUserChannelProfile = (username) => {
     },
   });
 };
+
+export const useGetUserWatchHistory = () => {
+  return useQuery({
+    queryKey: ["getUserWatchHistory"],
+    queryFn: async () => {
+      const response = await axiosPrivate.get("/users/watch-history", {
+        withCredentials: true,
+      });
+
+      return response.data;
+    },
+  });
+};

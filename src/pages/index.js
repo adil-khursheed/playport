@@ -7,6 +7,7 @@ import VideoDetails from "./VideoDetails";
 import SearchResult from "./SearchResult";
 import Playlist from "./Playlist";
 import AdminDashboard from "./AdminDashboard";
+import History from "./History";
 
 export {
   Register,
@@ -18,4 +19,5 @@ export {
   SearchResult,
   Playlist,
   AdminDashboard,
+  History,
 };

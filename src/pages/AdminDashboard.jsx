@@ -92,7 +92,7 @@ const AdminDashboard = () => {
               <div className="text-dark-2 dark:text-light-2">
                 <p>Total Views</p>
                 <h4 className="font-semibold text-2xl">
-                  {channelStatsData?.data
+                  {channelStatsData?.data?.totalViews
                     ? channelStatsData?.data?.totalViews
                     : "0"}
                 </h4>
@@ -105,7 +105,7 @@ const AdminDashboard = () => {
               <div className="text-dark-2 dark:text-light-2">
                 <p>Total Subscribers</p>
                 <h4 className="font-semibold text-2xl">
-                  {channelStatsData?.data
+                  {channelStatsData?.data?.totalSubscribers
                     ? channelStatsData?.data?.totalSubscribers
                     : "0"}
                 </h4>
@@ -118,7 +118,7 @@ const AdminDashboard = () => {
               <div className="text-dark-2 dark:text-light-2">
                 <p>Total Likes</p>
                 <h4 className="font-semibold text-2xl">
-                  {channelStatsData?.data
+                  {channelStatsData?.data?.totalLikes
                     ? channelStatsData?.data?.totalLikes
                     : "0"}
                 </h4>

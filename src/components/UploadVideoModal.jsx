@@ -100,6 +100,9 @@ const UploadVideoModal = ({ setUploadVideoModal }) => {
               </div>
             </div>
             <div>
+              <label className="text-dark-1 dark:text-light-1 font-medium">
+                Video
+              </label>
               <Controller
                 name="videoFile"
                 control={control}
@@ -112,13 +115,18 @@ const UploadVideoModal = ({ setUploadVideoModal }) => {
               />
             </div>
             <div>
-              <Input
-                type="file"
-                label="Thumbnail"
-                className="pl-0 pr-0 dark:text-light-1"
-                inputWrapperClassName="dark:border-light-2"
-                labelClassName="text-dark-2 dark:text-light-2"
-                {...register("thumbnail", { required: true })}
+              <label className="text-dark-1 dark:text-light-1 font-medium">
+                Thumbnail
+              </label>
+              <Controller
+                name="thumbnail"
+                control={control}
+                render={({ field }) => (
+                  <FileUploader
+                    fieldChange={field.onChange}
+                    action={"thumbnailUpload"}
+                  />
+                )}
               />
             </div>
             <div>

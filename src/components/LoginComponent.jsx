@@ -15,7 +15,11 @@ import { useLoginUser } from "../features/authApi";
 const LoginComponent = () => {
   const [togglePassword, setTogglePassword] = useState(false);
 
-  const { register, handleSubmit } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   const { setAuth, persist, setPersist } = useAuth();
 
@@ -98,9 +102,14 @@ const LoginComponent = () => {
                   icon1={<UserIcon />}
                   className="placeholder:text-light-2"
                   {...register("usernameOrEmail", {
-                    required: [true, "Username or email required!"],
+                    required: true,
                   })}
                 />
+                {errors.usernameOrEmail && (
+                  <p className="text-red-dark text-xs mt-1">
+                    Username or email is required!
+                  </p>
+                )}
               </div>
               <div>
                 <Input
@@ -112,9 +121,14 @@ const LoginComponent = () => {
                   icon2={togglePassword ? <EyeSlashIcon /> : <EyeIcon />}
                   onClick={handlePasswordToggle}
                   {...register("password", {
-                    required: [true, "Password required!"],
+                    required: true,
                   })}
                 />
+                {errors.password && (
+                  <p className="text-red-dark text-xs mt-1">
+                    Password is required!
+                  </p>
+                )}
               </div>
               <div className="flex items-center gap-3 text-dark-1 font-medium text-[15px]">
                 <input

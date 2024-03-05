@@ -73,12 +73,18 @@ const Profile = () => {
         pageStart={1}
         loader={<Loader />}
         className="w-full h-full px-4 py-3 flex flex-col justify-start gap-3 overflow-x-hidden overflow-y-auto">
-        <div className="w-full h-40 aspect-video rounded-lg border border-light-2 dark:border-dark-2">
-          <img
-            src={profileData?.data?.coverImage?.url}
-            alt={profileData?.data?.fullName}
-            className="w-full h-full object-contain rounded-lg"
-          />
+        <div className="h-40 aspect-video rounded-lg border border-light-2 dark:border-dark-2">
+          {profileData?.data?.coverImage?.url ? (
+            <img
+              src={profileData?.data?.coverImage?.url}
+              alt={profileData?.data?.fullName}
+              className="w-full h-full object-contain rounded-lg"
+            />
+          ) : (
+            <div className="w-full h-full bg-light-2 dark:bg-dark-2 flex items-center justify-center text-dark-2 dark:text-light-2">
+              <p>No cover image</p>
+            </div>
+          )}
         </div>
 
         <div className="flex items-start gap-6">

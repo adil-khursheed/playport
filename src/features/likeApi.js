@@ -1,4 +1,4 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { axiosPrivate } from "../api/axios";
 
 export const useLikeUnlikeVideo = (videoId) => {
@@ -18,6 +18,9 @@ export const useLikeUnlikeVideo = (videoId) => {
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ["videos"],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["likedVideos"],
       });
     },
   });
@@ -63,6 +66,19 @@ export const useLikeUnlikeTweets = ({ tweetId }) => {
       queryClient.invalidateQueries({
         queryKey: ["tweet"],
       });
+    },
+  });
+};
+
+export const useGetLikedVideos = () => {
+  return useQuery({
+    queryKey: ["likedVideos"],
+    queryFn: async () => {
+      const response = await axiosPrivate.get("/likes/videos", {
+        withCredentials: true,
+      });
+
+      return response.data;
     },
   });
 };

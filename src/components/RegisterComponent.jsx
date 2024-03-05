@@ -23,7 +23,11 @@ const RegisterComponent = () => {
   const navigate = useNavigate();
   const { setAuth } = useAuth();
 
-  const { register, handleSubmit } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   const handlePasswordToggle = () => {
     setTogglePassword(!togglePassword);
@@ -40,7 +44,7 @@ const RegisterComponent = () => {
     const formData = new FormData();
 
     formData.append("avatar", data.avatar[0]);
-    formData.append("coverImage", data.coverImage[0]);
+    formData.append("coverImage", data.coverImage[0] || "");
     formData.append("username", data.username);
     formData.append("email", data.email);
     formData.append("fullName", data.fullName);
@@ -63,7 +67,7 @@ const RegisterComponent = () => {
         <Loader className="w-full h-full bg-dark-1 flex items-center justify-center" />
       ) : (
         <div className="flex items-center justify-center h-full px-3">
-          <div className="flex flex-col items-center gap-3 max-w-md w-full px-6 py-3 bg-light-1 bg-opacity-50 backdrop-blur-[8px] border border-light-1 border-opacity-50 rounded-lg shadow-lg shadow-dark-1">
+          <div className="flex flex-col items-center gap-3 max-w-md w-full px-6 py-3 bg-light-1 bg-opacity-50 backdrop-blur-[8px] border border-light-1 border-opacity-50 rounded-lg shadow-lg shadow-dark-1 my-3">
             <div className="w-full h-auto flex items-center justify-center">
               <img
                 src="/assets/playport-dark-logo.svg"
@@ -76,7 +80,9 @@ const RegisterComponent = () => {
             </h1>
 
             {isError && (
-              <p className="text-red-600 mt-8 text-center">{error?.message}</p>
+              <p className="text-red-dark mt-8 text-center text-sm">
+                {error?.message}
+              </p>
             )}
 
             <form
@@ -98,7 +104,6 @@ const RegisterComponent = () => {
                     id="coverImage"
                     className="hidden"
                     {...register("coverImage", {
-                      required: true,
                       onChange: (e) =>
                         setCoverImagePrev(
                           URL.createObjectURL(e.target.files[0])
@@ -138,6 +143,11 @@ const RegisterComponent = () => {
                   />
                 </label>
               </div>
+              {errors.avatar && (
+                <p className="text-red-dark text-xs -mt-2">
+                  Avatar is required!
+                </p>
+              )}
 
               <div>
                 <Input
@@ -147,6 +157,11 @@ const RegisterComponent = () => {
                   icon1={<UserIcon />}
                   {...register("username", { required: true })}
                 />
+                {errors.username && (
+                  <p className="text-red-dark mt-1 text-xs">
+                    Username is required!
+                  </p>
+                )}
               </div>
               <div>
                 <Input
@@ -156,6 +171,11 @@ const RegisterComponent = () => {
                   icon1={<EnvelopeIcon />}
                   {...register("email", { required: true })}
                 />
+                {errors.email && (
+                  <p className="text-red-dark mt-1 text-xs">
+                    Email is required!
+                  </p>
+                )}
               </div>
               <div>
                 <Input
@@ -165,6 +185,11 @@ const RegisterComponent = () => {
                   icon1={<IdentificationIcon />}
                   {...register("fullName", { required: true })}
                 />
+                {errors.fullName && (
+                  <p className="text-red-dark mt-1 text-xs">
+                    Name is required!
+                  </p>
+                )}
               </div>
               <div>
                 <Input
@@ -177,6 +202,11 @@ const RegisterComponent = () => {
                   onClick={handlePasswordToggle}
                   {...register("password", { required: true })}
                 />
+                {errors.password && (
+                  <p className="text-red-dark mt-1 text-xs">
+                    Password is required!
+                  </p>
+                )}
               </div>
               <div>
                 <Button

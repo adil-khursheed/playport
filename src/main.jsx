@@ -17,6 +17,7 @@ import {
   SearchResult,
   Playlist,
   AdminDashboard,
+  History,
 } from "./pages";
 import { PersistLogin, AuthLayout } from "./components";
 import "react-toastify/dist/ReactToastify.css";
@@ -96,6 +97,14 @@ const router = createBrowserRouter([
             element: (
               <AuthLayout>
                 <AdminDashboard />
+              </AuthLayout>
+            ),
+          },
+          {
+            path: "/history",
+            element: (
+              <AuthLayout>
+                <History />
               </AuthLayout>
             ),
           },
